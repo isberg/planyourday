@@ -1,0 +1,58 @@
+FORMAT: 1A
+HOST: http://nope/
+
+# Plan Your Day
+
+Plan Your Day is a simple API allowing consumers to create and view projects and add and complete steps in them.
+
+## Projects Collection [/projects]
+
+### List All Projects [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Learn Go",
+                "created_at": "2015-08-05T08:40:51.620Z",
+                "steps": [
+                    {
+                        "name": "Install Go",
+                        "created_at": "2015-08-05T08:40:51.620Z",
+                        "complete_at": "2015-08-05T08:40:51.620Z"
+                    }, {
+                        "choice": "Go get",
+                        "created_at": "2015-08-05T08:40:51.620Z",
+                        "complete_at": "2015-08-05T08:40:51.620Z"
+                    }, {
+                        "choice": "Build & Run",
+                        "created_at": "2015-08-05T08:40:51.620Z",
+                        "complete_at": ""
+                    }
+                ]
+            }
+        ]
+
+### Create a New Question [POST]
+
+You may create your own project using this action. It takes a JSON
+object containing a project name.
+
++ Request (application/json)
+
+        {
+            "name": "Learn Ruby"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /projects/2
+
+    + Body
+
+            {
+                "question": "Learn Ruby",
+                "published_at": "2015-08-05T08:40:51.620Z",
+            }
