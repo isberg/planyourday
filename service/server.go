@@ -23,4 +23,6 @@ func NewServer() *negroni.Negroni {
 
 func initRoutes(mx *mux.Router, formatter *render.Render) {
 	mx.HandleFunc("/projects/{project}", getProjectHandler(formatter)).Methods("GET")
+	mx.HandleFunc("/projects", projectCollectionHandler(formatter)).Methods("GET")
+	mx.HandleFunc("/projects", createProjectHandler(formatter)).Methods("POST")
 }

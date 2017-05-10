@@ -18,3 +18,16 @@ func getProjectHandler(formatter *render.Render) http.HandlerFunc {
 		}
 	}
 }
+
+func projectCollectionHandler(formatter *render.Render) http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		formatter.JSON(w, http.StatusOK, nil)
+	}
+}
+
+func createProjectHandler(formatter *render.Render) http.HandlerFunc {
+	return func(w http.ResponseWriter, req *http.Request) {
+		w.Header().Set("Location", "Here")
+		formatter.JSON(w, http.StatusCreated, nil)
+	}
+}
