@@ -30,6 +30,11 @@ Plan Your Day is a simple API allowing consumers to create and view projects and
                         "complete_at": ""
                     }
                 ]
+            },
+            {
+                "name": "Learn Docker",
+                "created_at": "2015-08-05T09:40:51.620Z",
+                "steps": [ ]
             }
         ]
 
@@ -48,11 +53,27 @@ object containing a project name.
 
     + Headers
 
-            Location: /projects/2
+            Location: /projects/learnruby
 
     + Body
 
             {
-                "question": "Learn Ruby",
+                "name": "Learn Ruby",
                 "published_at": "2015-08-05T08:40:51.620Z"
             }
+
+## Project Informationation [/projects/{project_id}]
+
+### View Project information [GET /projects/learndocker]
+
++ Response 200 (application/json)
+
+            {
+                "name": "Learn Docker",
+                "created_at": "2015-08-05T09:40:51.620Z",
+                "steps": [ ]
+            }
+            
+### Access non-existing project [GET /projects/nothing]
+
++ Response 404
