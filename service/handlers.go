@@ -1,10 +1,10 @@
 package service
 
 import (
-	"io/ioutil"
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -38,14 +38,14 @@ func createProjectHandler(formatter *render.Render) http.HandlerFunc {
 		var project project
 		var name string
 		name = "noname"
-		if err:=json.Unmarshal(payload, &project); err== nil {
+		if err := json.Unmarshal(payload, &project); err == nil {
 			name = project.Name
 		} else {
 			println("error:", err)
 		}
 
 		println("name: ", name)
-		w.Header().Set("Location", "/projects/" + name)
+		w.Header().Set("Location", "/projects/"+name)
 		formatter.JSON(w, http.StatusCreated, nil)
 	}
 }

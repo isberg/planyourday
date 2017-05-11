@@ -1,17 +1,16 @@
-
 package service
 
 import (
-	"strings"
 	"bytes"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
 func makeRequest(method string, url string, json string) *httptest.ResponseRecorder {
 	var (
-		request *http.Request
+		request  *http.Request
 		recorder *httptest.ResponseRecorder
 	)
 
@@ -48,7 +47,7 @@ func TestCreateProjectSetsLocationHeaderThatMatchesProjectName(t *testing.T) {
 	name := "myproject"
 
 	json := "{ \"name\": \"" + name + "\" }"
-	println("json:" + json);
+	println("json:" + json)
 
 	recorder := makeRequest("POST", "/projects", json)
 
@@ -57,4 +56,3 @@ func TestCreateProjectSetsLocationHeaderThatMatchesProjectName(t *testing.T) {
 		t.Errorf("Expected Location Header '%v' to match project name '%v'", location, name)
 	}
 }
-
