@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	println("42")
+	println("Go Go wercker push to docker hub!")
 }
