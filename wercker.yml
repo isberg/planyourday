@@ -60,6 +60,9 @@ build:
 
 deploy:
  steps:
+   - script:
+     name: debug
+     code: echo $USERNAME
    - internal/docker-push:
        username: $USERNAME
        password: $PASSWORD
