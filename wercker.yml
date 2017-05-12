@@ -59,21 +59,11 @@ build:
 
 
 deploy:
-
  steps:
-
    - internal/docker-push:
-
        username: $USERNAME
-
        password: $PASSWORD
-
        cmd: /pipeline/source/planyourday
-
        port: 8080
-
        tag: latest
-
        repository: isberg/planyourday
-
-       registry: https://registry.hub.docker.com
