@@ -1,30 +1,12 @@
 package service
 
 import (
-	"bytes"
-	"net/http"
-	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"encoding/json"
+	"net/http"
 )
-
-func makeRequest(method string, url string, json string) *httptest.ResponseRecorder {
-	var (
-		request  *http.Request
-		recorder *httptest.ResponseRecorder
-	)
-
-	server := NewServer()
-	recorder = httptest.NewRecorder()
-	if json != "" {
-		request, _ = http.NewRequest(method, url, bytes.NewBufferString(json))
-	} else {
-		request, _ = http.NewRequest(method, url, nil)
-	}
-
-	server.ServeHTTP(recorder, request)
-	return recorder
-}
 
 func TestCreateProjectReturns201ForNewProject(t *testing.T) {
 	recorder := makeRequest("POST", "/projects", "{}")
@@ -54,5 +36,23 @@ func TestCreateProjectSetsLocationHeaderThatMatchesProjectName(t *testing.T) {
 	location := recorder.Header().Get("Location")
 	if !strings.HasSuffix(location, name) {
 		t.Errorf("Expected Location Header '%v' to match project name '%v'", location, name)
+	}
+}
+
+func TestCreateProjectReturnsTheNewProject(t *testing.T) {
+	myproject := project {"myproject"} 
+	data, _ := json.Marshal(myproject) 
+	recorder := makeRequest("POST", "/projects", string(data))
+
+	var newProject project
+	if err := json.Unmarshal(recorder.Body.Bytes(), &newProject); err != nil {
+		println("error:", err.Error())
+		body := recorder.Body.String()
+		t.Error("Did not receive expected response body, received", body)
+		return
+	}
+
+	if (myproject.Name != newProject.Name) {
+		t.Error("Mismatch in name, expected:", myproject.Name, "but was", newProject.Name)
 	}
 }

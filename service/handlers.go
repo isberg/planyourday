@@ -12,7 +12,8 @@ func getProjectHandler(formatter *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		vars := mux.Vars(req)
 		project := vars["project"]
-		if project == "learngo" {
+		println("project:", project)
+		if project == "learndocker" {
 			formatter.JSON(w, http.StatusOK, nil)
 		} else {
 			formatter.JSON(w, http.StatusNotFound, nil)
@@ -35,17 +36,20 @@ func createProjectHandler(formatter *render.Render) http.HandlerFunc {
 		payload, _ := ioutil.ReadAll(req.Body)
 		println("payload: " + string(payload))
 
-		var project project
+		var newproject project
 		var name string
 		name = "noname"
-		if err := json.Unmarshal(payload, &project); err == nil {
-			name = project.Name
+		if err := json.Unmarshal(payload, &newproject); err == nil {
+			name = newproject.Name
 		} else {
 			println("error:", err)
 		}
 
 		println("name: ", name)
 		w.Header().Set("Location", "/projects/"+name)
-		formatter.JSON(w, http.StatusCreated, nil)
+
+		data, _ := json.Marshal(newproject)
+		println("data:", string(data))
+		formatter.Text(w, http.StatusCreated, string(data))
 	}
 }

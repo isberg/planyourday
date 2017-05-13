@@ -7,17 +7,9 @@ import (
 )
 
 func TestGetProjectReturns200ForExistingProject(t *testing.T) {
-	var request *http.Request
-	var recorder *httptest.ResponseRecorder
-
-	server := NewServer()
-	targetProject := "learngo"
-
-	recorder = httptest.NewRecorder()
-	request, _ = http.NewRequest("GET", "/projects/"+targetProject, nil)
-	server.ServeHTTP(recorder, request)
+	recorder := makeRequest("GET", "/projects/learndocker", "")
 	if recorder.Code != http.StatusOK {
-		t.Errorf("Expected %v; received %v", http.StatusOK, recorder.Code)
+		t.Errorf("Expected Status Code %v, but was %v", http.StatusOK, recorder.Code)
 	}
 }
 
