@@ -26,6 +26,9 @@ func TestGetProjectReturns404ForNonExistingProject(t *testing.T) {
 	if recorder.Code != http.StatusNotFound {
 		t.Errorf("Expected %v; received %v", http.StatusNotFound, recorder.Code)
 	}
+	if body := recorder.Body.String(); len(body) > 0 {
+		t.Errorf("Expected no body; received '%v'", body)
+	}
 }
 
 func TestListAllProjectsReturns200(t *testing.T) {

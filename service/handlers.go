@@ -16,7 +16,7 @@ func getProjectHandler(formatter *render.Render) http.HandlerFunc {
 		if project == "learndocker" {
 			formatter.JSON(w, http.StatusOK, nil)
 		} else {
-			formatter.JSON(w, http.StatusNotFound, nil)
+			formatter.Text(w, http.StatusNotFound, "")
 		}
 	}
 }
