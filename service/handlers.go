@@ -54,6 +54,6 @@ func createProjectHandler(formatter *render.Render) http.HandlerFunc {
 
 		data, _ := json.Marshal(newproject)
 		println("data:", string(data))
-		formatter.Text(w, http.StatusCreated, string(data))
+		formatter.JSON(w, http.StatusCreated, newproject)
 	}
 }
