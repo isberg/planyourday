@@ -40,7 +40,7 @@ func TestCreateProjectSetsLocationHeaderThatMatchesProjectName(t *testing.T) {
 }
 
 func TestCreateProjectReturnsTheNewProject(t *testing.T) {
-	myproject := project {"myproject"} 
+	myproject := project {Name:"myproject"} 
 	data, _ := json.Marshal(myproject) 
 	recorder := makeRequest("POST", "/projects", string(data))
 

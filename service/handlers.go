@@ -8,13 +8,21 @@ import (
 	"net/http"
 )
 
+type project struct {
+	Name string `json:"name"`
+	CreatedAt string `json:"created_at"`
+	Steps []string `json:"steps"`
+}
+
 func getProjectHandler(formatter *render.Render) http.HandlerFunc {
+	learndocker := project { Name:"Learn Docker", Steps:([]string{}) }
+
 	return func(w http.ResponseWriter, req *http.Request) {
 		vars := mux.Vars(req)
 		project := vars["project"]
 		println("project:", project)
 		if project == "learndocker" {
-			formatter.JSON(w, http.StatusOK, nil)
+			formatter.JSON(w, http.StatusOK, learndocker)
 		} else {
 			formatter.Text(w, http.StatusNotFound, "")
 		}
@@ -23,12 +31,8 @@ func getProjectHandler(formatter *render.Render) http.HandlerFunc {
 
 func projectCollectionHandler(formatter *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		formatter.JSON(w, http.StatusOK, nil)
+		formatter.JSON(w, http.StatusOK, []project{})
 	}
-}
-
-type project struct {
-	Name string
 }
 
 func createProjectHandler(formatter *render.Render) http.HandlerFunc {
