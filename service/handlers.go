@@ -30,8 +30,9 @@ func getProjectHandler(formatter *render.Render) http.HandlerFunc {
 }
 
 func projectCollectionHandler(formatter *render.Render) http.HandlerFunc {
+	projects := []project {project {Name:"Learn Go"}, project{Name:"Learn Docker"} }
 	return func(w http.ResponseWriter, req *http.Request) {
-		formatter.JSON(w, http.StatusOK, []project{})
+		formatter.JSON(w, http.StatusOK, projects)
 	}
 }
 

@@ -64,5 +64,9 @@ func TestListAllProjects(t *testing.T) {
 	if body:= recorder.Body.String(); body == "null\n" {
 		t.Error("Should return empty json array instead of null")
 	}
+
+	if n:=len(projects); n < 2 {
+		t.Errorf("Should return 2 default projects in test mode, but returned %v", n)
+	}
 }
 
