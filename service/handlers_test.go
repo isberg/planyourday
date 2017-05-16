@@ -68,5 +68,14 @@ func TestListAllProjects(t *testing.T) {
 	if n:=len(projects); n < 2 {
 		t.Errorf("Should return 2 default projects in test mode, but returned %v", n)
 	}
+
+	if n:=len(projects); n > 0 {
+		proj := projects[0]
+		if proj.Steps == nil {
+			t.Errorf("Steps cannot be null, must be array with zero elements")
+		}
+	}
+
 }
+
 
