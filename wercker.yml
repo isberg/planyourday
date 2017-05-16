@@ -68,5 +68,5 @@ deploy:
        password: $PASSWORD
        cmd: ./app
        port: 3000
-       tag: $WERCKER_GIT_COMMIT
+       tag: latest, $WERCKER_GIT_COMMIT, $WERCKER_GIT_BRANCH
        repository: isberg/planyourday
