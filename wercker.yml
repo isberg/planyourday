@@ -63,10 +63,10 @@ deploy:
    - script:
      name: debug
      code: echo $USERNAME
-   - internal/docker-push:
+   - internal/docker-scratch-push:
        username: $USERNAME
        password: $PASSWORD
        cmd: /pipeline/source/planyourday
        port: 3000
-       tag: latest
+       tag: $WERCKER_GIT_COMMIT
        repository: isberg/planyourday
